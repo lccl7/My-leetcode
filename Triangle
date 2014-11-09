@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int minimumTotal(vector<vector<int> > &triangle) {
+        if(triangle.empty()) return 0;
+        vector<int> v;
+        v.push_back(triangle[0][0]);
+        for(int i = 1; i < triangle.size(); ++i)
+        {
+            for(int j = 0; j < triangle[i].size(); ++j)
+            {
+                if(j == 0)
+                    triangle[i][j] = triangle[i][j] + v[j];
+                else
+                if(j == triangle[i].size()-1)
+                    triangle[i][j] = triangle[i][j] + v[j-1];
+                else
+                {
+                    int sum1 = triangle[i][j] + v[j];
+                    int sum2 = triangle[i][j] + v[j-1];
+                    triangle[i][j] = min(sum1, sum2);
+                }
+            }
+            v.resize(triangle[i].size());
+            v = triangle[i];
+        }
+        sort(v.begin(), v.end());
+        return v[0];
+    }
+};
