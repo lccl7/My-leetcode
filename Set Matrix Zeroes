@@ -1,0 +1,24 @@
+The first method is to use O(m+n) to memory which index is 0.
+class Solution {
+public:
+    void setZeroes(vector<vector<int> > &matrix) {
+        set<int> indexset1, indexset2;
+        for(int i = 0; i < matrix.size(); ++i)
+            for(int j = 0; j < matrix[i].size(); ++j)
+            {
+                if(matrix[i][j] == 0)
+                {
+                    indexset1.insert(i);
+                    indexset2.insert(j);
+                }
+            }
+        for(int i = 0; i < matrix.size(); ++i)
+            for(int j = 0; j < matrix[i].size(); ++j)
+            {
+                if(indexset1.find(i) != indexset1.end())
+                    matrix[i][j] = 0;
+                else if(indexset2.find(j) != indexset2.end())
+                    matrix[i][j] = 0;
+            }
+    }
+};
