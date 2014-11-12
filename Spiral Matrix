@@ -1,3 +1,7 @@
+//star is the start of the row, and endr is the end of the row.
+//stac is the start of the col, and endc is the end of the column.
+//every loop we push_back a circle of the matrix, then go to the inner one next to it.
+//if only one row or one column left the the two if can handle it.
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int> > &matrix) {
