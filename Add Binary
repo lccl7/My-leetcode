@@ -1,8 +1,6 @@
 class Solution {
 public:
     string addBinary(string a, string b) {
-        if(a == "0" && b == "0")
-            return "0";
         int x = a.length(), y = b.length();
         if(x > y)
         for(int i = 0; i < x-y; ++i)
