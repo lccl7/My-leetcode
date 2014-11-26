@@ -1,0 +1,32 @@
+//The same as Subset, this time we should pay attention that tmp is not a subset but a permutation
+//so when tmp is the same size as the num, we can push_back
+//another variable is visit which records whether we have push_back an element(true) or not (false)
+void dfs(vector<int> &num, vector<vector<int> > &res, vector<int> tmp, vector<bool> &visit)
+{
+    if(tmp.size() == num.size())
+    {
+        res.push_back(tmp); return;
+    }
+    for(int i = 0; i < num.size(); ++i)
+    {
+        if(visit[i] == false)
+        {
+            tmp.push_back(num[i]);
+            visit[i] = true;
+            dfs(num, res, tmp, visit);
+            tmp.pop_back();
+            visit[i] = false;
+        }
+    }
+}
+
+class Solution {
+public:
+    vector<vector<int> > permute(vector<int> &num) {
+        vector<vector<int> > res;
+        vector<int> tmp;
+        vector<bool> visit(num.size(), false);
+        dfs(num, res, tmp, visit);
+        return res;
+    }
+};
