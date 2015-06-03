@@ -2,6 +2,7 @@
 //First find the shortest string of the vector. Here we overload
 //the function sort, and use a compare class cmp (be careful that 
 // when I use just a function not a class, the program doesnot pass)
+//or use a static function which begins with static.
 // The we use strs[0] as the longest prefix, and then compare it with 
 // all the remaining strings. Once some character is the same as the 
 // strs[0], we truncated it as a new strs[0].
@@ -32,4 +33,8 @@ public:
         }
     } cmp;
 
+    static bool operator() (string s1, string s2)
+    {
+        return s1.length() < s2.length();
+    }
 };
