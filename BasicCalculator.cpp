@@ -1,35 +1,36 @@
-//Use a stack to track positive sign or negative sign
-//Then we go over the string, give an order for each character
-//If it is a number, pop a sign from the stack and calculate with the result
-//If it is a right parentheses, remove a sign from the stack
-//If anything else except a whitespace, we change the sign of the top of a stack depend whether
-//the character is '-'.
-
-int calculate(string s)
-{
-    int res = 0;
-    int sign = 1;
-    stack<int> signstack;
-    signstack.push(1);
-    int n = s.length();
-    for(int i = 0; i < n; i++)
-    {
-        if(s[i] >= '0'&& s[i] <= '9')
+//for each number, if the operator before it is '+' or '-',
+//we should calculate the term of the current number and the sign of it.
+//else if the operator is '*' or '/', we can calculate the current number with
+//the number before it.
+int calculate(string s) {
+    istringstream in('+' + s + '+');
+    long long total = 0, term = 0, n;
+    char op;
+    while (in >> op) {
+        if (op == '+' || op == '-')
         {
-            int num = 0;
-            while(i < n && s[i] >= '0')
-                num = num * 10 + str[i++] - '0';
-            i--;
-            num *= signstack.top();
-            res += num;
+            total += term;
+            in >> term;
+            term *= 44 - op;
         }
-        else if(s[i] == ')')
-            signstack.pop();
-        else if(s[i] != ' ')
+        else
         {
-            sign = s[i] == '-'? -1 : 1;
-            signstack.push(sign);
+            in >> n;
+            if (op == '*')
+                term *= n;
+            else
+                term /= n;
         }
     }
-    return res;
+    return total;
+}
+
+int main(int argc, char** argv)
+{
+    ifstream infile(argv[1]);
+    string s;
+    while(getline(infile, s))
+    {
+        cout << calculate(s) << endl;
+    }
 }
