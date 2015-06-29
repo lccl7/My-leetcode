@@ -3,7 +3,7 @@
 //for example: when the row = 0, tmp = {1, 0, 2, 3}, the position
 //we can try is [0,1], [0,0], [0,2], [0,3].
 //is_solution tests the place that is valid. the if statement is used for
-//taking away in the same column, and in the same diagonal.(the row is grow every time, 
+//taking away in the same column, and in the same diagonal.(the row is grow every time,
 //so we don't care for it.
 //process_string is used at last when we can push_back the valid place.
 //the valid place is that (row, tmp[row]), so we test that j == tmp[i]
@@ -15,7 +15,7 @@ public:
         dfs(n, 0, res, tmp);
         return res;
     }
- 
+
     void process_string(int n, vector<vector<string>> &res, vector<int> tmp)
     {
         vector<string> vs;
@@ -33,7 +33,7 @@ public:
         }
         res.push_back(vs);
     }
-    
+
     bool is_solution(int row, vector<int> tmp)
     {
         for(int i = 0; i < row; ++i)
@@ -43,7 +43,7 @@ public:
         }
         return true;
     }
-    
+
     void dfs(int n, int row, vector<vector<string>> &res, vector<int> tmp)
     {
         if(n == row)
