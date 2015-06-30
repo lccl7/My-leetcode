@@ -64,3 +64,72 @@ public:
         }
     }
 };
+
+//second solution for the N-queens (4ms)
+void search2(int cur, int n, int& tot, vector<vector<int> >& vv, vector<int>& v)
+{
+    if(cur == n)
+    {
+        tot++;
+        vector<string> vs;
+        for(int i = 0; i < n; i++)
+        {
+            string s = "........";
+            s[v[i]] = 'Q';
+            vs.push_back(s);
+        }
+        if(tot < 3)
+        {
+            for(int i = 0; i < n; i++)
+            {
+                cout << vs[i] << endl;
+            }
+        }
+    }
+    else {
+        for(int i = 0; i < n; i++)
+            if(vv[0][i] == 0 && vv[1][(cur+i)] == 0 && vv[2][(cur-i+n)] == 0)
+            {
+                v[cur] = i;
+                vv[0][i] = vv[1][(cur+i)] = vv[2][(cur-i+n)] = 1;
+                search2(cur+1, n, tot, vv, v);
+                vv[0][i] = vv[1][(cur+i)] = vv[2][(cur-i+n)] = 0;
+            }
+    }
+}
+
+//third solution for N-queens
+void search1(int cur, int n, int& tot, vector<int>& v)
+{
+    if(cur == n)
+    {
+        tot++;
+        vector<string> vs;
+        for(int i = 0; i < cur; i++)
+        {
+            cout << v[i] << " ";
+            string s(n, '.');
+            s[v[i]] = 'Q';
+            vs.push_back(s);
+        }
+        cout << endl;
+        if(tot < 3)
+        for(int j = 0; j < n; j++)
+        {
+            cout << vs[j] << endl;
+        }
+        cout << endl;
+    }
+    else for(int i = 0; i < n; i++)
+    {
+        bool flag = true;
+        v[cur] = i;
+        for(int j = 0; j < cur; j++)
+            if(v[cur] == v[j] || cur - v[cur] == j - v[j] || cur + v[cur] == j + v[j])
+            {
+                flag = false; break;
+            }
+        if(flag)
+            search1(cur+1, n, tot, v);
+    }
+}
