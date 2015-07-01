@@ -1,11 +1,10 @@
 void dfs(vector<vector<int> > &res, vector<int> &num, int target, vector<int> tmp, int pos)
 {
-    if(target < 0) return;
     if(target == 0)
     {
         res.push_back(tmp); return;
     }
-    for(int i = pos; i < num.size(); ++i)
+    for(int i = pos; i < num.size() && target >= num[i]; ++i)
     {
         tmp.push_back(num[i]);
         dfs(res, num, target - num[i], tmp, i+1);
