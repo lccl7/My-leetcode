@@ -4,15 +4,13 @@
 class Solution {
 public:
     int trailingZeroes(int n) {
-        int sum = 0;
-        int i = 5;
-        
-        while(i <= n)
+        long sum = 0;
+
+        while(n /= 5)
         {
-            sum += n/i;
-            i *= 5;
+            sum += n;
         }
-        
+
         return sum;
     }
 };
