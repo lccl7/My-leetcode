@@ -3,8 +3,8 @@
 //so we first reorder the element in the array.
 class Solution {
 public:
-    int firstMissingPositive(int A[], int n) {
-
+    int firstMissingPositive(int A[], int n)
+    {
         for(int i = 0; i < n; ++i)
         {
             if(A[i] > 0 && A[i] <= n && A[A[i]-1] != A[i])
@@ -15,7 +15,6 @@ public:
                 --i;
             }
         }
-        
         for(int i = 0; i < n; ++i)
         {
             if(A[i] != i+1)
