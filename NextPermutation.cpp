@@ -17,3 +17,30 @@ public:
         reverse(num.begin(), num.end());
     }
 };
+
+//From WiKi
+void nextPermutation(vector<int>& nums)
+{
+    int k = -1, l = 0;
+    for(int i = nums.size()-2; i >= 0; i--)
+    {
+        if(nums[i] < nums[i+1])
+        {
+            k = i;
+            break;
+        }
+    }
+    if(k == -1)
+    {
+        reverse(nums.begin(), nums.end());
+        return;
+    }
+    for(int i = nums.size(); i >= 0; i--)
+        if(nums[i] > nums[k])
+        {
+            l = i;
+            break;
+        }
+    swap(nums[k], nums[i]);
+    reverse(nums.begin()+k+1, nums.end());
+}
